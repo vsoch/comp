@@ -2,19 +2,18 @@ package cli
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/vsoch/compenv/libcompenv/compenv"
+	"github.com/vsoch/comp/libcomp/comp"
 )
 
 // The submit command group
 var runCommand = &cobra.Command{
 	Use:   "run",
-	Short: "Run a pak on a cluster.",
+	Short: "Run a container.",
 	Long: `
 
-# run an environment "pak-dev" on cluster "sherlock"
-$ pak run --cpus 6 --memory 2GB sherlock:pak-dev
+$ comp run vanessa/salad
 
-See https://github.com/vsoch/compenv/ for installation, usage, and documentation.
+See https://github.com/vsoch/comp/ for installation, usage, and documentation.
 `,
 
 	// Resource pak identifier
@@ -29,7 +28,7 @@ func runRun(cmd *cobra.Command, args []string) {
 	// Written out just to be clear
 	image := args[0]
 
-	container := compenv.New(image)
+	container := comp.New(image)
 	container.Run()
 
 }

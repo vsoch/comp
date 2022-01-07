@@ -1,10 +1,10 @@
 package cli
 
 import (
-	"github.com/vsoch/compenv/lib/errors"
+	"github.com/vsoch/comp/lib/errors"
 
 	// import all backends for containers
-	_ "github.com/vsoch/compenv/backends"
+	_ "github.com/vsoch/comp/backends"
 )
 
 // Main is the entrypoint to running the client

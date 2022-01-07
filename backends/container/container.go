@@ -7,11 +7,12 @@ import (
 	"log"
 	"strings"
 
-	"github.com/vsoch/compenv/lib/command"
-	"github.com/vsoch/compenv/lib/errors"
-	"github.com/vsoch/compenv/lib/logger"
-	"github.com/vsoch/compenv/lib/options"
-	"github.com/vsoch/compenv/libcompenv/uri"
+	"github.com/vsoch/comp/lib/command"
+	"github.com/vsoch/comp/lib/errors"
+	"github.com/vsoch/comp/lib/logger"
+	"github.com/vsoch/comp/lib/options"
+	"github.com/vsoch/comp/libcomp/env"
+	"github.com/vsoch/comp/libcomp/uri"
 )
 
 var (
@@ -143,7 +144,6 @@ func (c Container) Pull(image string) error {
 	return err
 }
 
-
 // Check to see if container technology is installed
 func (c Container) Check() {
 	if c.Executable == "" {
@@ -186,8 +186,13 @@ func (c Container) RunCommand(cmd []string, args ...string) command.Output {
 // Env returns the output
 func (c Container) Env(image string) {
 	c.Check()
+	cmd := []string{c.Executable, "run", "-it", "--entrypoint", "env", image}
+	info.Cyan(strings.Join(cmd, " "))
+	err, output := command.RunCommand(cmd, nil)
+	errors.Check(err)
+	environ := env.Parse(output.Out)
+	environ.Print()
 }
-
 
 // PsTable is a shared function for printing images from a ps command
 func (c Container) PsTable(images Containers) {

@@ -1,6 +1,6 @@
 package backends
 
 import (
-	_ "github.com/vsoch/compenv/backends/docker"
-	_ "github.com/vsoch/compenv/backends/podman"
+	_ "github.com/vsoch/comp/backends/docker"
+	_ "github.com/vsoch/comp/backends/podman"
 )

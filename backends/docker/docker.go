@@ -6,18 +6,18 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/vsoch/compenv/lib/command"
-	"github.com/vsoch/compenv/lib/errors"
-	"github.com/vsoch/compenv/lib/fs"
-	"github.com/vsoch/compenv/lib/logger"
-	"github.com/vsoch/compenv/lib/options"
-	"github.com/vsoch/compenv/lib/str"
-	"github.com/vsoch/compenv/libcompenv/backend"
+	"github.com/vsoch/comp/lib/command"
+	"github.com/vsoch/comp/lib/errors"
+	"github.com/vsoch/comp/lib/fs"
+	"github.com/vsoch/comp/lib/logger"
+	"github.com/vsoch/comp/lib/options"
+	"github.com/vsoch/comp/lib/str"
+	"github.com/vsoch/comp/libcomp/backend"
 
 	"github.com/docker/docker/client"
 
 	// Shared container backend / functions
-	"github.com/vsoch/compenv/backends/container"
+	"github.com/vsoch/comp/backends/container"
 )
 
 var (

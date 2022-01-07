@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/vsoch/compenv/lib/errors"
+	"github.com/vsoch/comp/lib/errors"
 	"os"
 )
 
@@ -14,10 +14,10 @@ var (
 
 // The root command group
 var Root = &cobra.Command{
-	Use:   "compenv",
-	Short: "Show help for compenv commands.",
+	Use:   "comp",
+	Short: "Show help for comp commands.",
 	Long: `
-Compenv is a simple tool to inspect and compare container 📦️ environments.
+Comp is a simple tool to inspect and compare container 📦️ environments.
 `,
 	DisableAutoGenTag: true,
 	Run:               runRoot,

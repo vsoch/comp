@@ -6,16 +6,16 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/vsoch/compenv/config"
-	"github.com/vsoch/compenv/lib/command"
-	"github.com/vsoch/compenv/lib/errors"
-	"github.com/vsoch/compenv/lib/fs"
-	"github.com/vsoch/compenv/lib/logger"
-	"github.com/vsoch/compenv/lib/options"
-	"github.com/vsoch/compenv/libcompenv/backend"
+	"github.com/vsoch/comp/config"
+	"github.com/vsoch/comp/lib/command"
+	"github.com/vsoch/comp/lib/errors"
+	"github.com/vsoch/comp/lib/fs"
+	"github.com/vsoch/comp/lib/logger"
+	"github.com/vsoch/comp/lib/options"
+	"github.com/vsoch/comp/libcomp/backend"
 
 	// Shared container backend / functions
-	"github.com/vsoch/compenv/backends/container"
+	"github.com/vsoch/comp/backends/container"
 )
 
 var (

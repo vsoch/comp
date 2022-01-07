@@ -2,33 +2,41 @@ package cli
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/vsoch/compenv/libcompenv/compenv"
+	"github.com/vsoch/comp/libcomp/comp"
+	"github.com/vsoch/comp/libcomp/env"
 )
 
 var envCommand = &cobra.Command{
 	Use:   "env",
-	Short: "Inspect the env of a container",
+	Short: "Inspect the env of a container or host",
 	Long: `
 
-# run an environment "pak-dev" on cluster "sherlock"
-$ compenv env vanessa/salad
+# inspect the environment of vanessa/salad
+$ comp env vanessa/salad
 
-See https://github.com/vsoch/compenv/ for installation, usage, and documentation.
+# inspect the local environment
+$ comp env
+$ comp env .
+
+See https://github.com/vsoch/comp/ for installation, usage, and documentation.
 `,
 
 	// Resource pak identifier
-	Args:              cobra.MinimumNArgs(1),
 	DisableAutoGenTag: true,
 	Run:               runEnv,
 }
 
 func runEnv(cmd *cobra.Command, args []string) {
 
-	// Written out just to be clear
-	image := args[0]
-
-	container := compenv.New(image)
-	container.Env()
+	// No arguments or a present working directory . indicates local
+	if len(args) == 0 || len(args) == 1 && args[0] == "." {
+		environ := env.New()
+		environ.Print()
+	} else {
+		image := args[0]
+		container := comp.New(image)
+		container.Env()
+	}
 
 }
 

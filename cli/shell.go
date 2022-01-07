@@ -3,7 +3,7 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
-	core "github.com/vsoch/compenv/libcompenv/compenv"
+	core "github.com/vsoch/comp/libcomp/comp"
 )
 
 var (
@@ -17,9 +17,9 @@ var shellCommand = &cobra.Command{
 	Long: `
 
 # Shell into the container to inspect manually.
-$ compenv shell ubuntu
+$ comp shell ubuntu
 
-See https://github.com/vsoch/compenv/ for installation, usage, and documentation.
+See https://github.com/vsoch/comp/ for installation, usage, and documentation.
 `,
 	DisableAutoGenTag: true,
 
@@ -31,7 +31,7 @@ See https://github.com/vsoch/compenv/ for installation, usage, and documentation
 
 // runShell is the Run set for configCommand
 func runShell(cmd *cobra.Command, args []string) {
-	image := args[0]	
+	image := args[0]
 	container := core.New(image)
 	container.Shell(!keepShell)
 }

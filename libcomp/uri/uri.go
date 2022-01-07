@@ -1,7 +1,7 @@
 package uri
 
 import (
-	"github.com/vsoch/compenv/lib/str"
+	"github.com/vsoch/comp/lib/str"
 	"os"
 	"path/filepath"
 	"strings"

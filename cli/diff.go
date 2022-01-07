@@ -1,9 +1,9 @@
 package cli
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
-	//	"github.com/vsoch/compenv/libcompenv/backend"
-	//	core "github.com/vsoch/compenv/libcompenv/compenv"
+	"github.com/vsoch/comp/libcomp/env"
 )
 
 // The diff command group
@@ -12,9 +12,9 @@ var diffCommand = &cobra.Command{
 	Short: "Diff environments between containers.",
 	Long: `
 
-$ compenv diff <container1> <container2>
+$ comp diff <container1> <container2>
 
-See https://github.com/vsoch/compenv/ for installation, usage, and documentation.
+See https://github.com/vsoch/comp/ for installation, usage, and documentation.
 `,
 
 	// Args are pieces to compare
@@ -26,6 +26,15 @@ See https://github.com/vsoch/compenv/ for installation, usage, and documentation
 // runDiff is the Run set for configCommand
 func runDiff(cmd *cobra.Command, args []string) {
 
+	// No arguments or a present working directory . indicates local
+	var envA, envB *env.Environment
+	if args[0] == "." {
+		envA = env.New()
+	} else if args[1] == "." {
+		envB = env.New()
+	}
+	fmt.Println(envA)
+	fmt.Println(envB)
 }
 
 func init() {

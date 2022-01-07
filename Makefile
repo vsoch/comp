@@ -11,10 +11,10 @@ GO_VERSION := $(shell go version)
 
 all:
 	gofmt -s -w .
-	go build -v --ldflags "-s -X github.com/vsoch/compenv/version.Version=$(VERSION)" -o compenv
+	go build -v --ldflags "-s -X github.com/vsoch/comp/version.Version=$(VERSION)" -o comp
 	
 build:
-	go build -v --ldflags "-s -X github.com/vsoch/compenv/version.Version=$(VERSION)" -o compenv
+	go build -v --ldflags "-s -X github.com/vsoch/comp/version.Version=$(VERSION)" -o comp
 	
 run:
 	go run main.go

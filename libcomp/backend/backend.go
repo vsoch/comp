@@ -3,7 +3,7 @@ package backend
 // A backend is a cluster controller module that can be registered with Libpak
 import (
 	"fmt"
-	"github.com/vsoch/compenv/libcompenv/uri"
+	"github.com/vsoch/comp/libcomp/uri"
 	"log"
 )
 

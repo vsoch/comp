@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/vsoch/compenv/version"
+	"github.com/vsoch/comp/version"
 )
 
 // PrintVersion prints the version to the terminal
@@ -18,7 +18,7 @@ func init() {
 
 var versionCommand = &cobra.Command{
 	Use:   "version",
-	Short: `Show the compenv version.`,
-	Long:  `Show the compenv version.`,
+	Short: `Show the comp version.`,
+	Long:  `Show the comp version.`,
 	Run:   func(cmd *cobra.Command, args []string) { PrintVersion() },
 }

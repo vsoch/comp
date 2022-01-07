@@ -1,6 +1,6 @@
 package config
 
-// defaults for compenv
+// defaults for comp
 
 var (
 	Shell               string = "/bin/sh"

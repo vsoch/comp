@@ -1,4 +1,4 @@
-module github.com/vsoch/compenv
+module github.com/vsoch/comp
 
 go 1.16
 
