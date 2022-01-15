@@ -3,6 +3,7 @@ package backend
 // A backend is a cluster controller module that can be registered with Libpak
 import (
 	"fmt"
+	"github.com/vsoch/comp/libcomp/env"
 	"github.com/vsoch/comp/libcomp/uri"
 	"log"
 )
@@ -24,10 +25,7 @@ type BackendInfo interface {
 
 	// Description of this fs - defaults to Name
 	GetDescription() string
-
-	// Basic run or headless run (submit) of a backend (e.g., container run)
-	// TOOD we may want these arguments to be more/less generic
-	Env(image string)
+	Env(image string) *env.Environment
 	Shell(image string, remove bool) error
 	Run(args ...string) error
 

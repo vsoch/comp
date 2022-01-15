@@ -1,4 +1,4 @@
-# Compe
+# Comp
 
 > compare environments and other things between containers, and host 📦️
 

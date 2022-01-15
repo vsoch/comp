@@ -47,13 +47,27 @@ container	podman
 and to inspect the host, you can leave out the container name (or provide an explicit `.` to indicate the present working directory.
 
 ```bash
-$ comp env vanessa/salad
+$ comp env
+$ comp env .
 ...
+```
+
+### Diff
+
+The basic of a diff is to show changes. This means that we eliminiate variables
+that are the same, and only leave behind those that are added or removed from the
+first to the second.
+
+```bash
+# Compare container vanessa/salad to local environment
+# E.g., how did the local environment change from the container?
+$ comp diff vanessa/salad .
 ```
 
 ## TODO
 
  - move env into main library
+ - differ should be able to break apart changes to PATH/LD_LIBRARY_PATH etc
  - create search command to search the environment
  - create json output option
  - create diff command to compare envs (json output, or colored diff)

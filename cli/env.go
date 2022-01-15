@@ -35,7 +35,8 @@ func runEnv(cmd *cobra.Command, args []string) {
 	} else {
 		image := args[0]
 		container := comp.New(image)
-		container.Env()
+		environ := container.Env()
+		environ.Print()
 	}
 
 }

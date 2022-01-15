@@ -184,14 +184,14 @@ func (c Container) RunCommand(cmd []string, args ...string) command.Output {
 }
 
 // Env returns the output
-func (c Container) Env(image string) {
+func (c Container) Env(image string) *env.Environment {
 	c.Check()
 	cmd := []string{c.Executable, "run", "-it", "--entrypoint", "env", image}
 	info.Cyan(strings.Join(cmd, " "))
 	err, output := command.RunCommand(cmd, nil)
 	errors.Check(err)
 	environ := env.Parse(output.Out)
-	environ.Print()
+	return environ
 }
 
 // PsTable is a shared function for printing images from a ps command

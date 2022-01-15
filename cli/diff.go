@@ -1,9 +1,8 @@
 package cli
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/vsoch/comp/libcomp/env"
+	"github.com/vsoch/comp/libcomp/diff"
 )
 
 // The diff command group
@@ -27,14 +26,8 @@ See https://github.com/vsoch/comp/ for installation, usage, and documentation.
 func runDiff(cmd *cobra.Command, args []string) {
 
 	// No arguments or a present working directory . indicates local
-	var envA, envB *env.Environment
-	if args[0] == "." {
-		envA = env.New()
-	} else if args[1] == "." {
-		envB = env.New()
-	}
-	fmt.Println(envA)
-	fmt.Println(envB)
+	differ := diff.NewDiffer(args[0], args[1])
+	differ.PrintDiff()
 }
 
 func init() {
