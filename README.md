@@ -8,7 +8,7 @@ For environments, this means the environment on your host vs a container, or the
 a basic interface to interact with several container technologies, which could
 be extended to other projects.
 
-🚧️ **under development** 🚧️
+⭐️ [Documentation](https://vsoch.github.io/comp/) ⭐️
 
 ## TODO
 
