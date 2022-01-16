@@ -1,7 +1,8 @@
 package diff
 
 import (
-	"fmt"
+	"encoding/json"
+	"io/ioutil"
 	"time"
 
 	"github.com/vsoch/comp/lib/str"
@@ -54,12 +55,6 @@ func (d *Differ) GetDiff() *Diff {
 			} else {
 				change := Change{Name: keyB, Original: valA, New: valB}
 				diffs.Changed[keyB] = change
-				if keyB == "HOME" {
-					fmt.Println(keyB)
-					fmt.Println(diffs.Changed[keyB].New)
-					fmt.Println(diffs.Changed[keyB].Original)
-
-				}
 			}
 
 			// We don't have the value in A, so it was added
@@ -78,11 +73,26 @@ func (d *Differ) GetDiff() *Diff {
 }
 
 func (d *Differ) PrintDiff() {
-
 	diffs := d.GetDiff()
 	diffs.PrintRemoved()
 	diffs.PrintAdded()
 	diffs.PrintChanged()
+}
+
+func (d *Differ) SaveJson(outfile string) {
+	outJson := d.ToJson(true)
+	_ = ioutil.WriteFile(outfile, outJson, 0644)
+}
+
+func (d *Differ) ToJson(pretty bool) []byte {
+	diffs := d.GetDiff()
+	var outJson []byte
+	if pretty {
+		outJson, _ = json.MarshalIndent(diffs, "", "    ")
+	} else {
+		outJson, _ = json.Marshal(diffs)
+	}
+	return outJson
 }
 
 // Create a new Differ between two sources

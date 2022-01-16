@@ -41,10 +41,10 @@ type Change struct {
 
 // A diff holds changes, additions, deletions
 type Diff struct {
-	Added     map[string]string
-	Removed   map[string]string
-	Unchanged map[string]string
-	Changed   map[string]Change
+	Added     map[string]string `json:"added"`
+	Removed   map[string]string `json:"removed"`
+	Unchanged map[string]string `json:"unchanged"`
+	Changed   map[string]Change `json:"changed"`
 }
 
 func (d *Diff) PrintRemoved() {

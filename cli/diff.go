@@ -1,8 +1,16 @@
 package cli
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/vsoch/comp/libcomp/diff"
+)
+
+var (
+	diffQuiet   bool
+	diffJson    bool
+	diffPretty  bool
+	diffOutfile string
 )
 
 // The diff command group
@@ -27,9 +35,22 @@ func runDiff(cmd *cobra.Command, args []string) {
 
 	// No arguments or a present working directory . indicates local
 	differ := diff.NewDiffer(args[0], args[1])
-	differ.PrintDiff()
+	if diffJson {
+		output := string(differ.ToJson(diffPretty))
+		fmt.Println(output)
+	} else if !diffQuiet {
+		differ.PrintDiff()
+	}
+
+	if diffOutfile != "" {
+		differ.SaveJson(diffOutfile)
+	}
 }
 
 func init() {
+	diffCommand.Flags().BoolVarP(&diffQuiet, "quiet", "q", false, "Generate output as json")
+	diffCommand.Flags().BoolVarP(&diffJson, "json", "j", false, "Generate output as json")
+	diffCommand.Flags().BoolVarP(&diffPretty, "pretty", "p", false, "print pretty")
+	diffCommand.Flags().StringVarP(&diffOutfile, "outfile", "o", "", "Save output to this json file.")
 	Root.AddCommand(diffCommand)
 }

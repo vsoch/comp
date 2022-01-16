@@ -1,0 +1,17 @@
+{
+    "added": {},
+    "removed": {},
+    "unchanged": {
+        "HOME": "/root",
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "TERM": "xterm",
+        "container": "podman"
+    },
+    "changed": {
+        "HOSTNAME": {
+            "name": "HOSTNAME",
+            "original": "00ed8f07183e",
+            "new": "8e90d25734d4"
+        }
+    }
+}

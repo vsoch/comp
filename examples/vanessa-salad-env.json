@@ -1,0 +1,7 @@
+{
+    "HOME": "/root",
+    "HOSTNAME": "a5a7a28aeffb",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "TERM": "xterm",
+    "container": "podman"
+}

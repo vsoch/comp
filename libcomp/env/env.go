@@ -3,11 +3,14 @@ package env
 // This is an abstract backend that is shared by Podman and Docker
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"os"
 	"sort"
 	"strings"
 
 	"github.com/vsoch/comp/lib/logger"
+	"github.com/vsoch/comp/lib/str"
 )
 
 var (
@@ -17,7 +20,7 @@ var (
 
 // An enviroment holds variables (key value pairs)
 type Environment struct {
-	Envars map[string]string
+	Envars map[string]string `json:"envars"`
 }
 
 func parseEnv(output string) map[string]string {
@@ -38,10 +41,16 @@ func parseEnvLines(lines []string) map[string]string {
 		if parts[0] == "" {
 			continue
 		}
+
+		// Clean up newlines
+		var key string
 		if len(parts) == 1 {
-			vars[parts[0]] = ""
+			key = str.Strip(parts[0])
+			vars[key] = ""
 		} else if len(parts) == 2 {
-			vars[parts[0]] = parts[1]
+			key = str.Strip(parts[0])
+			val := str.Strip(parts[1])
+			vars[key] = val
 		}
 	}
 	return vars
@@ -70,6 +79,22 @@ func (e *Environment) Print() {
 		table.AddRow([]string{key, e.Envars[key]})
 	}
 	table.Print()
+}
+
+func (e *Environment) ToJson(pretty bool) []byte {
+
+	var outJson []byte
+	if pretty {
+		outJson, _ = json.MarshalIndent(e.Envars, "", "    ")
+	} else {
+		outJson, _ = json.Marshal(e.Envars)
+	}
+	return outJson
+}
+
+func (e *Environment) SaveJson(outfile string) {
+	outJson := e.ToJson(true)
+	_ = ioutil.WriteFile(outfile, outJson, 0644)
 }
 
 // New creates a new parsed environment on host
