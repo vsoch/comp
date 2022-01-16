@@ -1,4 +1,4 @@
-# Comp
+# User Guide
 
 Comp is a tool for comparing container environments, meaning between containers,
 or between the host and container. Eventually I'd like to define a more controlled
@@ -8,8 +8,6 @@ interface for setting envars on the fly, etc.
 
 By default, `comp` will use docker as a container backend, however you can set
 your preferred container backend by doing:
-
-## TODO set container backend via environment?
 
 ## Commands
 
