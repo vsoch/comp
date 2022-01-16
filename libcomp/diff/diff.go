@@ -2,8 +2,10 @@ package diff
 
 import (
 	"fmt"
+	"github.com/sergi/go-diff/diffmatchpatch"
 	"github.com/vsoch/comp/lib/logger"
 	"sort"
+	"strings"
 )
 
 // Get sorted keys for a dict to print
@@ -65,12 +67,15 @@ func (d *Diff) PrintAdded() {
 
 func (d *Diff) PrintChanged() {
 	keys := sortedChanges(d.Changed)
+	dmp := diffmatchpatch.New()
 	log := logger.Logger{}
+
 	for _, key := range keys {
-		name := fmt.Sprintf("%-25s", key)
-		// TODO this should be the change in colors
-		log.Yellow(" + " + name + " " + d.Changed[key].Original)
-		// log.Yellow(" + " + name + " " + d.GetDiff(key))
+		name := log.YellowColor(fmt.Sprintf("^ %-25s", key))
+		changes := dmp.DiffMain(d.Changed[key].Original, d.Changed[key].New, false)
+		formatted := strings.ReplaceAll(dmp.DiffPrettyText(changes), ":", "\n                             ")
+		fmt.Println(" " + name + " " + formatted)
+
 	}
 }
 

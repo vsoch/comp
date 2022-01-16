@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/vsoch/comp/lib/str"
 	"github.com/vsoch/comp/libcomp/comp"
 	"github.com/vsoch/comp/libcomp/env"
 )
@@ -39,14 +40,26 @@ func (d *Differ) GetDiff() *Diff {
 	// We want change of state from A to B
 	for keyB, valB := range d.EnvB.Envars {
 
+		// Bug https://github.com/sergi/go-diff/issues/115
+		valB = str.Strip(valB)
+
 		// If we have the value in A it is either unchanged or changed
 		if valA, ok := d.EnvA.Envars[keyB]; ok {
+
+			valA = str.Strip(valA)
 
 			// Unchanged if they are the same
 			if valA == valB {
 				diffs.Unchanged[keyB] = valB
 			} else {
-				diffs.Changed[keyB] = Change{Name: keyB, Original: valA, New: valB}
+				change := Change{Name: keyB, Original: valA, New: valB}
+				diffs.Changed[keyB] = change
+				if keyB == "HOME" {
+					fmt.Println(keyB)
+					fmt.Println(diffs.Changed[keyB].New)
+					fmt.Println(diffs.Changed[keyB].Original)
+
+				}
 			}
 
 			// We don't have the value in A, so it was added
@@ -70,18 +83,11 @@ func (d *Differ) PrintDiff() {
 	diffs.PrintRemoved()
 	diffs.PrintAdded()
 	diffs.PrintChanged()
-
-	//	fmt.Println(diffs.Added)
-	//	fmt.Println(diffs.Removed)
-	//	fmt.Println(diffs.Unchanged)
-	//	fmt.Println(diffs.Changed)
 }
 
 // Create a new Differ between two sources
 func NewDiffer(srcA string, srcB string) *Differ {
 	envA := GetEnv(srcA)
 	envB := GetEnv(srcB)
-	fmt.Println(envA)
-	fmt.Println(envB)
 	return &Differ{SrcA: srcA, SrcB: srcB, EnvA: envA, EnvB: envB, CreatedAt: time.Now()}
 }

@@ -9,5 +9,6 @@ require (
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/moby/term v0.0.0-20210619224110-3f7ff695adc6 // indirect
 	github.com/morikuni/aec v1.0.0 // indirect
+	github.com/sergi/go-diff v1.1.0
 	github.com/spf13/cobra v1.3.0
 )

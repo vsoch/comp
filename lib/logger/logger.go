@@ -36,7 +36,6 @@ type Table struct {
 }
 
 // Print a single string in a color of choice
-// TODO would be nice that this can handle more than a single string
 func (l *Logger) Red(message string) {
 	l.printColor(message, red)
 }
@@ -60,10 +59,39 @@ func (l *Logger) Cyan(message string) {
 	l.printColor(message, cyan)
 }
 
+// printColor will print colored messages
 func (l *Logger) printColor(message string, color string) {
 	fmt.Printf("%s", string(color))
 	fmt.Printf(message)
 	fmt.Println(string(reset))
+}
+
+// formatColor is the same, but returns the string
+func (l *Logger) formatColor(message string, color string) string {
+	return fmt.Sprintf("%s%s%s", string(color), message, string(reset))
+}
+
+func (l *Logger) RedColor(message string) string {
+	return l.formatColor(message, red)
+}
+func (l *Logger) GreenColor(message string) string {
+	return l.formatColor(message, green)
+}
+func (l *Logger) YellowColor(message string) string {
+	return l.formatColor(message, yellow)
+}
+
+func (l *Logger) BlueColor(message string) string {
+	return l.formatColor(message, blue)
+}
+func (l *Logger) PurpleColor(message string) string {
+	return l.formatColor(message, purple)
+}
+func (l *Logger) WhiteColor(message string) string {
+	return l.formatColor(message, white)
+}
+func (l *Logger) CyanColor(message string) string {
+	return l.formatColor(message, cyan)
 }
 
 // Table returns the same logger with a writer

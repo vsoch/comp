@@ -4,6 +4,19 @@ import (
 	"strings"
 )
 
+func Strip(line string) string {
+	return strings.NewReplacer(
+		"\r\n", "",
+		"\r", "",
+		"\n", "",
+		"\v", "",
+		"\f", "",
+		"\u0085", "",
+		"\u2028", "",
+		"\u2029", "",
+	).Replace(line)
+}
+
 // Reverse a list of string
 func ReverseStringList(list []string) []string {
 	for i, j := 0, len(list)-1; i < j; i, j = i+1, j-1 {
